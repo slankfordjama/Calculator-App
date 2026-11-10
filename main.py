@@ -53,7 +53,7 @@ class CalculatorRoot(BoxLayout):
             "number": (0.18, 0.20, 0.24, 1),
             "operation": (0.13, 0.30, 0.33, 1),
             "utility": (0.34, 0.18, 0.18, 1),
-            "calculate": (0.46, 0.20, 0.74, 1),
+            "calculate": (0.85, 0.10, 0.10, 1),
         }
         button = Button(
             text=text,
