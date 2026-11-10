@@ -74,8 +74,8 @@ def test_calculate_button(calculator):
 
 def test_calculate_button_purple(calculator):
     red, green, blue, alpha = buttons(calculator)["="].background_color
-    # Purple has both red and blue components above green and an opaque fill.
-    assert red > green and blue > green and red > 0.3 and blue > 0.3
+    # Red has a strong red component, low green and blue, and an opaque fill.
+    assert red > 0.7 and 0 <= green < 0.3 and 0 <= blue < 0.3
     assert alpha == pytest.approx(1)
 
 
