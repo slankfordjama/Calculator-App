@@ -73,10 +73,19 @@ def test_calculate_button(calculator):
 
 
 def test_calculate_button_purple(calculator):
-    red, green, blue, alpha = buttons(calculator)["="].background_color
-    # Red has a strong red component, low green and blue, and an opaque fill.
-    assert red > 0.7 and 0 <= green < 0.3 and 0 <= blue < 0.3
-    assert alpha == pytest.approx(1)
+    equals = buttons(calculator)["="]
+    samples = [tuple(equals.background_color)]
+    deadline = Clock.get_time() + 2.6
+    while Clock.get_time() < deadline:
+        Clock.tick()
+        samples.append(tuple(equals.background_color))
+    # The animated fill must visit every rainbow color and remain opaque.
+    rainbow = (
+        (1, 0, 0), (1, 0.5, 0), (1, 1, 0), (0, 1, 0),
+        (0, 0, 1), (0.29, 0, 0.51), (0.56, 0, 1),
+    )
+    assert all(any(sample[:3] == pytest.approx(color, abs=0.15) for sample in samples) for color in rainbow)
+    assert all(sample[3] == pytest.approx(1) for sample in samples)
 
 
 def test_result_display(calculator):
