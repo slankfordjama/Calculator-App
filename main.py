@@ -54,7 +54,7 @@ class CalculatorRoot(BoxLayout):
             "number": (0.18, 0.20, 0.24, 1),
             "operation": (0.13, 0.30, 0.33, 1),
             "utility": (0.34, 0.18, 0.18, 1),
-            "calculate": (1, 0, 0, 1),
+            "calculate": (0, 0, 1, 1),
         }
         button = Button(
             text=text,
@@ -64,18 +64,6 @@ class CalculatorRoot(BoxLayout):
             color=(1, 1, 1, 1),
         )
         button.bind(on_press=lambda instance: callback(instance.text))
-        if kind == "calculate":
-            rainbow = (
-                Animation(background_color=(1, 0.5, 0, 1), duration=0.3)
-                + Animation(background_color=(1, 1, 0, 1), duration=0.3)
-                + Animation(background_color=(0, 1, 0, 1), duration=0.3)
-                + Animation(background_color=(0, 0, 1, 1), duration=0.3)
-                + Animation(background_color=(0.29, 0, 0.51, 1), duration=0.3)
-                + Animation(background_color=(0.56, 0, 1, 1), duration=0.3)
-                + Animation(background_color=(1, 0, 0, 1), duration=0.3)
-            )
-            rainbow.repeat = True
-            rainbow.start(button)
         return button
 
     def _append_digit(self, digit):
