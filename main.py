@@ -3,6 +3,7 @@ from decimal import Decimal, DivisionByZero, InvalidOperation
 from kivy.animation import Animation
 from kivy.app import App
 from kivy.core.window import Window
+from kivy.graphics import Color, Rectangle
 from kivy.metrics import dp
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
@@ -30,6 +31,10 @@ class CalculatorRoot(BoxLayout):
             color=(0.96, 0.97, 1, 1),
             size_hint=(1, 0.34),
         )
+        with self.display.canvas.before:
+            self._display_bg_color = Color(0, 0, 1, 1)
+            self._display_bg_rect = Rectangle(pos=self.display.pos, size=self.display.size)
+        self.display.bind(pos=self._sync_display_background, size=self._sync_display_background)
         self.display.bind(size=self._sync_display_text_size)
         self.add_widget(self.display)
 
@@ -46,6 +51,10 @@ class CalculatorRoot(BoxLayout):
         keypad.add_widget(self._button("=", self._calculate, kind="calculate"))
         self.add_widget(keypad)
 
+    def _sync_display_background(self, *_):
+        self._display_bg_rect.pos = self.display.pos
+        self._display_bg_rect.size = self.display.size
+
     def _sync_display_text_size(self, *_):
         self.display.text_size = (self.display.width - dp(20), self.display.height)
 
@@ -54,7 +63,7 @@ class CalculatorRoot(BoxLayout):
             "number": (0.18, 0.20, 0.24, 1),
             "operation": (0.13, 0.30, 0.33, 1),
             "utility": (0.34, 0.18, 0.18, 1),
-            "calculate": (0, 0, 1, 1),
+            "calculate": (0, 1, 0, 1),
         }
         button = Button(
             text=text,

@@ -10,6 +10,7 @@ from pathlib import Path
 import pytest
 from kivy.clock import Clock
 from kivy.core.window import Window
+from kivy.graphics import Color
 from kivy.uix.button import Button
 from kivy.uix.label import Label
 
@@ -84,7 +85,7 @@ def test_calculate_button_purple(calculator):
         (1, 0, 0), (1, 0.5, 0), (1, 1, 0), (0, 1, 0),
         (0, 0, 1), (0.29, 0, 0.51), (0.56, 0, 1),
     )
-    assert all(sample[:3] == pytest.approx((0, 0, 1), abs=0.15) for sample in samples)
+    assert all(sample[:3] == pytest.approx((0, 1, 0), abs=0.15) for sample in samples)
     assert all(sample[3] == pytest.approx(1) for sample in samples)
 
 
@@ -94,6 +95,7 @@ def test_result_display(calculator):
     assert display.center_y >= calculator.y + calculator.height * 2 / 3
     press(calculator, "6", "+", "2", "=")
     assert display.text == "8"
+    assert any(isinstance(instr, Color) and tuple(instr.rgba) == pytest.approx((0, 0, 1, 1)) for instr in display.canvas.before.children)
 
 
 def test_operation_buttons(calculator):
