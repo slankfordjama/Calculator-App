@@ -32,7 +32,7 @@ class CalculatorRoot(BoxLayout):
             size_hint=(1, 0.34),
         )
         with self.display.canvas.before:
-            self._display_bg_color = Color(0, 0, 1, 1)
+            self._display_bg_color = Color(0, 0, 0.54, 1)
             self._display_bg_rect = Rectangle(pos=self.display.pos, size=self.display.size)
         self.display.bind(pos=self._sync_display_background, size=self._sync_display_background)
         self.display.bind(size=self._sync_display_text_size)
@@ -63,7 +63,7 @@ class CalculatorRoot(BoxLayout):
             "number": (0.18, 0.20, 0.24, 1),
             "operation": (0.13, 0.30, 0.33, 1),
             "utility": (0.34, 0.18, 0.18, 1),
-            "calculate": (0, 1, 0, 1),
+            "calculate": (0.5, 0, 0.5, 1),
         }
         button = Button(
             text=text,
