@@ -85,7 +85,7 @@ def test_calculate_button_purple(calculator):
         (1, 0, 0), (1, 0.5, 0), (1, 1, 0), (0, 1, 0),
         (0, 0, 1), (0.29, 0, 0.51), (0.56, 0, 1),
     )
-    assert all(sample[:3] == pytest.approx((0, 1, 0), abs=0.15) for sample in samples)
+    assert all(sample[:3] == pytest.approx((0, 0, 1), abs=0.15) for sample in samples)
     assert all(sample[3] == pytest.approx(1) for sample in samples)
 
 
