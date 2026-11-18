@@ -157,4 +157,8 @@ class SimpleCalculatorApp(App):
     title = "Simple Calculator"
 
     def build(self):
-        return CalculatorRoot()\n\nif __name__ == "__main__":\n    SimpleCalculatorApp().run()\n
+        return CalculatorRoot()
+
+
+if __name__ == "__main__":
+    SimpleCalculatorApp().run()
