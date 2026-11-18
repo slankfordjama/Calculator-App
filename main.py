@@ -63,7 +63,7 @@ class CalculatorRoot(BoxLayout):
             "number": (0.18, 0.20, 0.24, 1),
             "operation": (0.13, 0.30, 0.33, 1),
             "utility": (0.34, 0.18, 0.18, 1),
-            "calculate": (0, 0, 0.54, 1),
+            "calculate": (0, 0.39, 0, 1),
         }
         button = Button(
             text=text,
@@ -157,8 +157,4 @@ class SimpleCalculatorApp(App):
     title = "Simple Calculator"
 
     def build(self):
-        return CalculatorRoot()
-
-
-if __name__ == "__main__":
-    SimpleCalculatorApp().run()
+        return CalculatorRoot()\n\nif __name__ == "__main__":\n    SimpleCalculatorApp().run()\n
