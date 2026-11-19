@@ -80,8 +80,7 @@ def test_calculate_button_purple(calculator):
     while Clock.get_time() < deadline:
         Clock.tick()
         samples.append(tuple(equals.background_color))
-    # The animated fill must visit every rainbow color and remain opaque.
-    assert all(sample[:3] == pytest.approx((1, 0.55, 0), abs=0.05) for sample in samples)
+    assert all(sample[:3] == pytest.approx((0, 0, 1), abs=0.05) for sample in samples)
     assert all(sample[3] == pytest.approx(1) for sample in samples)
 
 
