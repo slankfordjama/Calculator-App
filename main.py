@@ -43,7 +43,7 @@ class CalculatorRoot(BoxLayout):
         self.add_widget(operations)
 
         keypad = GridLayout(cols=3, spacing=dp(8), size_hint=(1, 0.53))
-        for digit in ("9", "8", "7", "6", "5", "4", "3", "2", "1", "0"):
+        for digit in ("7", "8", "9", "4", "5", "6", "1", "2", "3", "0"):
             keypad.add_widget(self._button(digit, self._append_digit))
 
         keypad.add_widget(self._button("C", self._clear, kind="utility"))
