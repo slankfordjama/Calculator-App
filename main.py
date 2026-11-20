@@ -37,10 +37,11 @@ class CalculatorRoot(BoxLayout):
         self.display.bind(size=self._sync_display_text_size)
         self.add_widget(self.display)
 
-        operations = GridLayout(cols=5, spacing=dp(8), size_hint=(1, 0.13))
-        for symbol in ("+", "-", "*", "/"):
-            operations.add_widget(self._button(symbol, self._choose_operation, kind="operation"))
-        operations.add_widget(self._button(".", self._append_decimal))
+        operations = GridLayout(cols=3, spacing=dp(8), size_hint=(1, 0.13))
+        for symbol in ("+", "-", "/", "*", "."):
+            callback = self._append_decimal if symbol == "." else self._choose_operation
+            kind = "operation" if symbol in ("+", "-", "*", "/") else "number"
+            operations.add_widget(self._button(symbol, callback, kind=kind))
         self.add_widget(operations)
 
         keypad = GridLayout(cols=3, spacing=dp(8), size_hint=(1, 0.53))
