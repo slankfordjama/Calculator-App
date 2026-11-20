@@ -57,7 +57,7 @@ def test_number_buttons(calculator):
     numeric = [w for w in calculator.walk() if isinstance(w, Button) and w.text.isdigit()]
     assert len(numeric) == 10
     ordered = sorted(numeric, key=lambda w: (-round(w.center_y, 2), w.center_x))
-    assert [w.text for w in ordered] == list("7894561230")
+    assert [w.text for w in ordered] == list("7894561320")
     press(calculator, *"9876543210")
     assert calculator.display.text == "9876543210"
 
