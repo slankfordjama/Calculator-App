@@ -38,7 +38,7 @@ class CalculatorRoot(BoxLayout):
         self.add_widget(self.display)
 
         operations = GridLayout(cols=3, spacing=dp(8), size_hint=(1, 0.13))
-        for symbol in ("+", "-", "/"):
+        for symbol in ("+", "-", "*", "/"):
             operations.add_widget(self._button(symbol, self._choose_operation, kind="operation"))
         self.add_widget(operations)
 
@@ -46,6 +46,7 @@ class CalculatorRoot(BoxLayout):
         for digit in ("7", "8", "9", "4", "5", "6", "1", "2", "3", "0"):
             keypad.add_widget(self._button(digit, self._append_digit))
 
+        keypad.add_widget(self._button(".", self._append_decimal))
         keypad.add_widget(self._button("C", self._clear, kind="utility"))
         keypad.add_widget(self._button("=", self._calculate, kind="calculate"))
         self.add_widget(keypad)
@@ -87,6 +88,17 @@ class CalculatorRoot(BoxLayout):
             self.current_value += digit
         self._refresh_display()
 
+    def _append_decimal(self, _text):
+        if self.just_calculated:
+            self.current_value = ""
+            self.left_value = None
+            self.operation = None
+            self.just_calculated = False
+
+        if "." not in self.current_value:
+            self.current_value = (self.current_value or "0") + "."
+        self._refresh_display()
+
     def _choose_operation(self, symbol):
         if self.current_value:
             self.left_value = self.current_value
@@ -109,6 +121,8 @@ class CalculatorRoot(BoxLayout):
                 result = left + right
             elif self.operation == "-":
                 result = left - right
+            elif self.operation == "*":
+                result = left * right
             elif self.operation == "/":
                 result = left / right
             else:
